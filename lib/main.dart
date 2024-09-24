@@ -6,6 +6,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,6 +22,8 @@ class MyApp extends StatelessWidget {
 }
 
 class ReminderScreen extends StatefulWidget {
+  const ReminderScreen({super.key});
+
   @override
   _ReminderScreenState createState() => _ReminderScreenState();
 }
@@ -58,7 +62,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
         now.year, now.month, now.day, selectedTime.hour, selectedTime.minute);
 
     if (reminderDateTime.isBefore(now)) {
-      final tomorrow = now.add(Duration(days: 1));
+      final tomorrow = now.add(const Duration(days: 1));
       scheduleReminderForDate(DateTime(tomorrow.year, tomorrow.month,
           tomorrow.day, selectedTime.hour, selectedTime.minute));
     } else {
@@ -69,12 +73,12 @@ class _ReminderScreenState extends State<ReminderScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Reminder Set"),
+          title: const Text("Reminder Set"),
           content: Text(
               "Reminder for $selectedActivity on $selectedDay at ${selectedTime.format(context)} has been set."),
           actions: [
             TextButton(
-              child: Text("OK"),
+              child: const Text("OK"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -115,14 +119,14 @@ class _ReminderScreenState extends State<ReminderScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min, 
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 24.0),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 24.0),
                     child: Text(
                       'Reminder App',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color:  const Color.fromARGB(255, 37, 38, 40), 
+                        color:  Color.fromARGB(255, 37, 38, 40), 
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -130,7 +134,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                   
                   Container(
                     width: MediaQuery.of(context).size.width * 0.2,
-                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
@@ -140,7 +144,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                     child: DropdownButton<String>(
                       value: selectedDay,
                       isExpanded: true,
-                      underline: SizedBox(),
+                      underline: const SizedBox(),
                       items: daysOfWeek.map((String day) {
                         return DropdownMenuItem<String>(
                           value: day,
@@ -154,10 +158,10 @@ class _ReminderScreenState extends State<ReminderScreen> {
                       },
                     ),
                   ),
-                  SizedBox(height: 16), 
+                  const SizedBox(height: 16), 
                   Container(
                     width: MediaQuery.of(context).size.width * 0.2, 
-                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
@@ -166,7 +170,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                     child: DropdownButton<String>(
                       value: selectedActivity,
                       isExpanded: true,
-                      underline: SizedBox(), 
+                      underline: const SizedBox(), 
                       items: activities.map((String activity) {
                         return DropdownMenuItem<String>(
                           value: activity,
@@ -180,9 +184,8 @@ class _ReminderScreenState extends State<ReminderScreen> {
                       },
                     ),
                   ),
-                  SizedBox(height: 24), 
+                  const SizedBox(height: 24), 
                   ElevatedButton(
-                    child: Text("Select Time"),
                     onPressed: () async {
                       TimeOfDay? pickedTime = await showTimePicker(
                         context: context,
@@ -196,19 +199,20 @@ class _ReminderScreenState extends State<ReminderScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 154, 188, 239), 
-                      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32), 
+                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32), 
                     ),
+                    child: Text("Select Time"),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ElevatedButton(
-                    child: Text("Set Reminder"),
                     onPressed: () {
                       scheduleReminder();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 143, 235, 240), 
-                      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32), 
+                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32), 
                     ),
+                    child: Text("Set Reminder"),
                   ),
                 ],
               ),
